@@ -2,14 +2,26 @@
 
 @section('page-content')
     <h1>BookStore</h1>
+
     <div class="row">
-        <div class="col-lg-12">
-            <div class="d-flex justify-content-end mb-3">
-                <a href="{{ route('books.create') }}" class="btn btn-primary">New Book</a>
-            </div>
+        <div class="col-lg-10 p-3">
+            <form method="get" action="{{ route('books.index') }}">
+                <div class="row g-2">
+                    <div class="col-8">
+                        <input type="text" class="form-control" name="search" placeholder="Search by title or author" value="{{ request('search') }}">
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn btn-primary">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-2">
+            <a href="{{ route('books.create') }}" class="btn btn-primary">New Book</a>
         </div>
     </div>
-    <table class="table table-striped table-bordered">
+
+    <table class="table table-striped">
         <tr>
             <th>ID</th>
             <th>Title</th>

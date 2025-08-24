@@ -11,12 +11,16 @@ class BookController extends Controller {
     public function welcome(){
         return view("welcome");
     }
-    public function index(){
-        // fetch books data from books table
-        $books = Book::paginate(10);
-        // dd($books);
+    public function index(Request $request){
 
-        // Logic to retrieve and display books
+        $search = $request->input('search');
+        if ($search) {
+            $books = Book::where('title', 'like', "%$search%")
+                ->orWhere('author', 'like', "%$search%")
+                ->paginate(10);
+        } else {
+            $books = Book::paginate(10);
+        }
         return view('books.index')->with('books', $books);
     }
 
